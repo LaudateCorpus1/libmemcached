@@ -26,10 +26,6 @@ EXTRA_DIST=
 dist_man_MANS=
 MAINTAINERCLEANFILES=
 
-if IS_VCS_CHECKOUT
-SUBDIRS= docs
-endif
-
 #includes additional rules from aminclude.am
 @INC_AMINCLUDE@
 
@@ -61,8 +57,6 @@ endif
 include libmemcachedutil-1.0/include.am
 
 include clients/include.am
-
-include man/include.am
 
 if BUILD_LIBMEMCACHED_PROTOCOL
 include example/include.am
