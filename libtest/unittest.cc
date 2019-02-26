@@ -622,6 +622,8 @@ static test_return_t application_doesnotexist_BINARY(void *)
   ASSERT_EQ(Application::INVALID_POSIX_SPAWN, true_app.run(args));
 #elif defined(__FreeBSD__) && __FreeBSD__
   ASSERT_EQ(Application::INVALID_POSIX_SPAWN, true_app.run(args));
+#elif defined(__GNU__)
+  ASSERT_EQ(Application::INVALID_POSIX_SPAWN, true_app.run(args));
 #else
   ASSERT_EQ(Application::SUCCESS, true_app.run(args));
   ASSERT_EQ(Application::INVALID_POSIX_SPAWN, true_app.join());

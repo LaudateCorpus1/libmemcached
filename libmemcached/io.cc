@@ -499,7 +499,7 @@ memcached_return_t memcached_io_read(memcached_instance_st* instance,
                                      void *buffer, size_t length, ssize_t& nread)
 {
   assert(memcached_is_udp(instance->root) == false);
-  assert_msg(instance, "Programmer error, memcached_io_read() recieved an invalid Instance"); // Programmer error
+  assert_msg(instance, "Programmer error, memcached_io_read() received an invalid Instance"); // Programmer error
   char *buffer_ptr= static_cast<char *>(buffer);
 
   if (instance->fd == INVALID_SOCKET)
