@@ -1,3 +1,6 @@
+docs/source/conf.py
+mem_config.in~
+*.o
 *.log
 *.trs
 *.exe
