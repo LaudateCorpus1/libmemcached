@@ -42,6 +42,8 @@ SYNOPSIS
 
 .. c:type:: MEMCACHED_HASH_MURMUR3
 
+.. c:type:: MEMCACHED_HASH_ASIS
+
 
 Compile and link with -lmemcachedutil -lmemcached
 

@@ -166,11 +166,13 @@ inline void __config_error(Context *context, yyscan_t *scanner, const char *erro
 %token HSIEH
 %token MURMUR
 %token JENKINS
+%token ASIS
 
 /* Distributions */
 %token CONSISTENT
 %token MODULA
 %token RANDOM
+%token JCH
 
 /* Boolean values */
 %token <boolean> CSL_TRUE
@@ -506,6 +508,10 @@ hash:
           {
             $$= MEMCACHED_HASH_JENKINS;
           }
+        | ASIS
+          {
+            $$= MEMCACHED_HASH_ASIS;
+          }
         ;
 
 string:
@@ -523,6 +529,10 @@ distribution:
           CONSISTENT
           {
             $$= MEMCACHED_DISTRIBUTION_CONSISTENT;
+          }
+        | JCH
+          {
+            $$= MEMCACHED_DISTRIBUTION_JCH;
           }
         | MODULA
           {

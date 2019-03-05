@@ -1,5 +1,5 @@
 /*  vim:expandtab:shiftwidth=2:tabstop=2:smarttab:
- * 
+ *
  *  Libmemcached library
  *
  *  Copyright (C) 2011 Data Differential, http://datadifferential.com/
@@ -42,6 +42,8 @@
 
 #include <libmemcached/virtual_bucket.h>
 
+static uint32_t jch(uint32_t, uint32_t);
+
 uint32_t memcached_generate_hash_value(const char *key, size_t key_length, memcached_hash_t hash_algorithm)
 {
   return libhashkit_digest(key, key_length, (hashkit_hash_algorithm_t)hash_algorithm);
@@ -80,6 +82,8 @@ static uint32_t dispatch_host(const Memcached *ptr, uint32_t hash)
         right= begin;
       return right->index;
     }
+  case MEMCACHED_DISTRIBUTION_JCH:
+    return jch(hash, memcached_server_count(ptr));
   case MEMCACHED_DISTRIBUTION_MODULA:
     return hash % memcached_server_count(ptr);
   case MEMCACHED_DISTRIBUTION_RANDOM:
@@ -192,4 +196,31 @@ memcached_return_t memcached_set_hashkit(memcached_st *shell, hashkit_st *hashk)
 const char * libmemcached_string_hash(memcached_hash_t type)
 {
   return libhashkit_string_hash((hashkit_hash_algorithm_t)type);
+}
+
+
+/*
+ * See the paper introducing jump consistent hashing for an
+ * explanation of this algorithm: https://arxiv.org/pdf/1406.2294.pdf
+ *
+ * Despite expecting an input covering uint64_t, experimentation
+ * reveals adequate performance for inputs limited to a 32 bit range
+ * (with lower bucket size variance relative to a version using a
+ * 32-bit input and LCG multiplier).  I.E., this works just fine using
+ * the 32-bit outputs produced by hashkit.
+ */
+static inline int32_t jump_consistent_hash(uint64_t key, int32_t num_buckets)
+{
+  int64_t b = -1, j = 0;
+  while (j < num_buckets) {
+    b = j;
+    key = key * 2862933555777941757ULL + 1;
+    j = (b + 1) * (double(1LL << 31) / double((key >> 33) + 1));
+  }
+  return b;
+}
+
+static uint32_t jch(uint32_t hash, uint32_t server_count)
+{
+  return jump_consistent_hash(hash, server_count);
 }

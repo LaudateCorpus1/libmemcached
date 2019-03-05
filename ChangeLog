@@ -1,3 +1,8 @@
+1.0.18-4.1+jch-01
+* Applied debian source package patches
+* Added MEMCACHED_DISTRIBUTION_JCH (jump consistent hashing)
+* Added MEMCACHED_HASH_ASIS (use up to first four bytes of keys as-is instead of hashing)
+
 1.0.18 Sun Feb  9 01:49:56 PST 2014
 * MEMCACHED_BEHAVIOR_RETRY_TIMEOUT can now be set to zero.
 * Numerous bug fixes.

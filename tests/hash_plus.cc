@@ -80,6 +80,7 @@ static test_return_t set_function_test(void *)
     HASHKIT_HASH_FNV1A_32,
     HASHKIT_HASH_MURMUR,
     HASHKIT_HASH_JENKINS,
+    HASHKIT_HASH_ASIS,
     HASHKIT_HASH_MAX
   };
 
@@ -145,6 +146,10 @@ static test_return_t set_function_test(void *)
 
     case HASHKIT_HASH_JENKINS:
       list= jenkins_values;
+      break;
+
+    case HASHKIT_HASH_ASIS:
+      list= asis_values;
       break;
 
     case HASHKIT_HASH_CUSTOM:

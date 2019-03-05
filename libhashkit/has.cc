@@ -71,6 +71,7 @@ bool libhashkit_has_algorithm(const hashkit_hash_algorithm_t algo)
   case HASHKIT_HASH_MD5:
   case HASHKIT_HASH_CRC:
   case HASHKIT_HASH_JENKINS:
+  case HASHKIT_HASH_ASIS:
   case HASHKIT_HASH_CUSTOM:
     return true;
 

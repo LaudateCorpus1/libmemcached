@@ -2088,6 +2088,9 @@ test_return_t behavior_test(memcached_st *memc)
   memcached_behavior_set(memc, MEMCACHED_BEHAVIOR_HASH, MEMCACHED_HASH_CRC);
   test_compare(uint64_t(MEMCACHED_HASH_CRC), memcached_behavior_get(memc, MEMCACHED_BEHAVIOR_HASH));
 
+  memcached_behavior_set(memc, MEMCACHED_BEHAVIOR_HASH, MEMCACHED_HASH_ASIS);
+  test_compare(uint64_t(MEMCACHED_HASH_ASIS), memcached_behavior_get(memc, MEMCACHED_BEHAVIOR_HASH));
+
   test_true(memcached_behavior_get(memc, MEMCACHED_BEHAVIOR_SOCKET_SEND_SIZE));
 
   test_true(memcached_behavior_get(memc, MEMCACHED_BEHAVIOR_SOCKET_RECV_SIZE));
@@ -3290,6 +3293,27 @@ test_return_t enable_consistent_hsieh(memcached_st *memc)
   return TEST_SUCCESS;
 }
 
+test_return_t enable_jch_asis(memcached_st *memc)
+{
+  test_compare(MEMCACHED_SUCCESS, memcached_behavior_set(memc, MEMCACHED_BEHAVIOR_DISTRIBUTION, MEMCACHED_DISTRIBUTION_JCH));
+  test_compare(memcached_behavior_get(memc, MEMCACHED_BEHAVIOR_DISTRIBUTION),  uint64_t(MEMCACHED_DISTRIBUTION_JCH));
+
+  test_return_t rc;
+  if ((rc= pre_asis(memc)) != TEST_SUCCESS)
+  {
+    return rc;
+  }
+
+  test_compare(memcached_behavior_get(memc, MEMCACHED_BEHAVIOR_DISTRIBUTION),  uint64_t(MEMCACHED_DISTRIBUTION_JCH));
+
+  if (memcached_behavior_get(memc, MEMCACHED_BEHAVIOR_HASH) != MEMCACHED_HASH_ASIS)
+  {
+    return TEST_SKIPPED;
+  }
+
+  return TEST_SUCCESS;
+}
+
 test_return_t enable_cas(memcached_st *memc)
 {
   if (libmemcached_util_version_check(memc, 1, 2, 4))
@@ -3641,6 +3665,7 @@ test_return_t hash_sanity_test (memcached_st *memc)
 #endif
   assert(MEMCACHED_HASH_MURMUR == MEMCACHED_HASH_MURMUR);
   assert(MEMCACHED_HASH_JENKINS == MEMCACHED_HASH_JENKINS);
+  assert(MEMCACHED_HASH_ASIS == MEMCACHED_HASH_ASIS);
   assert(MEMCACHED_HASH_MAX == MEMCACHED_HASH_MAX);
 
   return TEST_SUCCESS;
@@ -3837,6 +3862,20 @@ test_return_t jenkins_run (memcached_st *)
   {
     test_compare(jenkins_values[x],
                  memcached_generate_hash_value(*ptr, strlen(*ptr), MEMCACHED_HASH_JENKINS));
+  }
+
+  return TEST_SUCCESS;
+}
+
+test_return_t asis_run (memcached_st *)
+{
+  uint32_t x;
+  const char **ptr;
+
+  for (ptr= list_to_hash, x= 0; *ptr; ptr++, x++)
+  {
+    test_compare(asis_values[x],
+                 memcached_generate_hash_value(*ptr, strlen(*ptr), MEMCACHED_HASH_ASIS));
   }
 
   return TEST_SUCCESS;

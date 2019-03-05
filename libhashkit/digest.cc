@@ -77,6 +77,8 @@ uint32_t libhashkit_digest(const char *key, size_t key_length, hashkit_hash_algo
 #endif
   case HASHKIT_HASH_JENKINS:
     return libhashkit_jenkins(key, key_length);
+  case HASHKIT_HASH_ASIS:
+    return libhashkit_asis(key, key_length);
   case HASHKIT_HASH_CUSTOM:
   case HASHKIT_HASH_MAX:
   default:

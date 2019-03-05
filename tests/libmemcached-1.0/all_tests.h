@@ -368,7 +368,8 @@ test_st hash_tests[] ={
   {"hsieh", false, (test_callback_fn*)hsieh_run },
   {"murmur", false, (test_callback_fn*)murmur_run },
   {"murmur3", false, (test_callback_fn*)murmur3_TEST },
-  {"jenkis", false, (test_callback_fn*)jenkins_run },
+  {"jenkins", false, (test_callback_fn*)jenkins_run },
+  {"asis", false, (test_callback_fn*)asis_run },
   {"memcached_get_hashkit", false, (test_callback_fn*)memcached_get_hashkit_test },
   {0, 0, (test_callback_fn*)0}
 };
@@ -463,6 +464,7 @@ collection_st collection[] ={
   {"crc", (test_callback_fn*)pre_crc, 0, tests},
   {"hsieh", (test_callback_fn*)pre_hsieh, 0, tests},
   {"jenkins", (test_callback_fn*)pre_jenkins, 0, tests},
+  {"asis", (test_callback_fn*)pre_asis, 0, tests},
   {"fnv1_64", (test_callback_fn*)pre_hash_fnv1_64, 0, tests},
   {"fnv1a_64", (test_callback_fn*)pre_hash_fnv1a_64, 0, tests},
   {"fnv1_32", (test_callback_fn*)pre_hash_fnv1_32, 0, tests},
@@ -474,6 +476,7 @@ collection_st collection[] ={
   {"gets", (test_callback_fn*)enable_cas, 0, tests},
   {"consistent_crc", (test_callback_fn*)enable_consistent_crc, 0, tests},
   {"consistent_hsieh", (test_callback_fn*)enable_consistent_hsieh, 0, tests},
+  {"jch_asis", (test_callback_fn*)enable_jch_asis, 0, tests},
 #ifdef MEMCACHED_ENABLE_DEPRECATED
   {"deprecated_memory_allocators", (test_callback_fn*)deprecated_set_memory_alloc, 0, tests},
 #endif

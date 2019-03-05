@@ -68,7 +68,11 @@ static hashkit_return_t _set_function(struct hashkit_st::hashkit_function_st *se
 
   case HASHKIT_HASH_JENKINS:
     self->function= hashkit_jenkins;
-    break;    
+    break;
+
+  case HASHKIT_HASH_ASIS:
+    self->function= hashkit_asis;
+    break;
 
   case HASHKIT_HASH_CUSTOM:
     return HASHKIT_INVALID_ARGUMENT;
@@ -177,6 +181,10 @@ static hashkit_hash_algorithm_t get_function_type(const hashkit_hash_fn function
   else if (function == hashkit_jenkins)
   {
     return HASHKIT_HASH_JENKINS;
+  }
+  else if (function == hashkit_asis)
+  {
+    return HASHKIT_HASH_ASIS;
   }
 
   return HASHKIT_HASH_CUSTOM;
