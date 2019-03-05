@@ -169,6 +169,10 @@ void process_hash_option(memcached_st *memc, char *opt_hash)
   {
     set= MEMCACHED_HASH_FNV1A_32;
   }
+  else if (!strcasecmp(opt_hash, "ASIS"))
+  {
+    set= MEMCACHED_HASH_ASIS;
+  }
   else
   {
     fprintf(stderr, "hash: type not recognized %s\n", opt_hash);

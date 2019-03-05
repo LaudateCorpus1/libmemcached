@@ -51,6 +51,7 @@ test_return_t pre_hash_fnv1a_32(memcached_st*);
 test_return_t pre_hash_fnv1a_64(memcached_st*);
 test_return_t pre_hsieh(memcached_st*);
 test_return_t pre_jenkins(memcached_st*);
+test_return_t pre_asis(memcached_st*);
 test_return_t pre_md5(memcached_st*);
 test_return_t pre_murmur(memcached_st*);
 test_return_t pre_nodelay(memcached_st*);

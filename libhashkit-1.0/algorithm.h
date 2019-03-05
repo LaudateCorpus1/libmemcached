@@ -78,6 +78,9 @@ HASHKIT_API
 uint32_t libhashkit_jenkins(const char *key, size_t key_length);
 
 HASHKIT_API
+uint32_t libhashkit_asis(const char *key, size_t key_length);
+
+HASHKIT_API
 uint32_t libhashkit_md5(const char *key, size_t key_length);
 
 HASHKIT_API

@@ -121,6 +121,13 @@ test_return_t pre_jenkins(memcached_st *memc)
   return TEST_SKIPPED;
 }
 
+test_return_t pre_asis(memcached_st *memc)
+{
+  memcached_behavior_set(memc, MEMCACHED_BEHAVIOR_HASH, (uint64_t)MEMCACHED_HASH_ASIS);
+
+  return TEST_SUCCESS;
+}
+
 
 test_return_t pre_md5(memcached_st *memc)
 {

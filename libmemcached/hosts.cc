@@ -85,6 +85,7 @@ memcached_return_t run_distribution(Memcached *ptr)
 
   case MEMCACHED_DISTRIBUTION_VIRTUAL_BUCKET:
   case MEMCACHED_DISTRIBUTION_MODULA:
+  case MEMCACHED_DISTRIBUTION_JCH:
     break;
 
   case MEMCACHED_DISTRIBUTION_RANDOM:

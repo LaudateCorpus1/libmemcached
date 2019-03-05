@@ -31,6 +31,7 @@ libhashkit_libhashkit_la_SOURCES+= libhashkit/aes.cc
 libhashkit_libhashkit_la_SOURCES+= libhashkit/algorithm.cc
 libhashkit_libhashkit_la_SOURCES+= libhashkit/behavior.cc
 libhashkit_libhashkit_la_SOURCES+= libhashkit/crc32.cc
+libhashkit_libhashkit_la_SOURCES+= libhashkit/asis.cc
 libhashkit_libhashkit_la_SOURCES+= libhashkit/digest.cc
 libhashkit_libhashkit_la_SOURCES+= libhashkit/encrypt.cc
 libhashkit_libhashkit_la_SOURCES+= libhashkit/fnv_32.cc

@@ -93,7 +93,7 @@ environments).
 
 .. c:type:: MEMCACHED_BEHAVIOR_HASH
 
-Makes the default hashing algorithm for keys use MD5. The value can be set to either :c:type:`MEMCACHED_HASH_DEFAULT`, :c:type:`MEMCACHED_HASH_MD5`, :c:type:`MEMCACHED_HASH_CRC`, :c:type:`MEMCACHED_HASH_FNV1_64`, :c:type:`MEMCACHED_HASH_FNV1A_64`, :c:type:`MEMCACHED_HASH_FNV1_32`, :c:type:`MEMCACHED_HASH_FNV1A_32`, :c:type:`MEMCACHED_HASH_JENKINS`, :c:type:`MEMCACHED_HASH_HSIEH`, and :c:type:`MEMCACHED_HASH_MURMUR`.  
+Makes the default hashing algorithm for keys use MD5. The value can be set to either :c:type:`MEMCACHED_HASH_DEFAULT`, :c:type:`MEMCACHED_HASH_MD5`, :c:type:`MEMCACHED_HASH_CRC`, :c:type:`MEMCACHED_HASH_FNV1_64`, :c:type:`MEMCACHED_HASH_FNV1A_64`, :c:type:`MEMCACHED_HASH_FNV1_32`, :c:type:`MEMCACHED_HASH_FNV1A_32`, :c:type:`MEMCACHED_HASH_JENKINS`, :c:type:`MEMCACHED_HASH_HSIEH`, :c:type:`MEMCACHED_HASH_MURMUR`, and :c:type:`MEMCACHED_HASH_ASIS`.
 
 Each hash has it's advantages and it's weaknesses. If you don't know or don't 
 care, just go with the default.
@@ -106,7 +106,8 @@ Support for :c:type:`MEMCACHED_HASH_HSIEH` is a compile time option that is disa
 
 Using this you can enable different means of distributing values to servers.
 
-The default method is MEMCACHED_DISTRIBUTION_MODULA. You can enable consistent hashing by setting MEMCACHED_DISTRIBUTION_CONSISTENT.  Consistent hashing delivers better distribution and allows servers to be added to the cluster with minimal cache losses. Currently MEMCACHED_DISTRIBUTION_CONSISTENT is an alias for the value MEMCACHED_DISTRIBUTION_CONSISTENT_KETAMA.
+The default method is MEMCACHED_DISTRIBUTION_MODULA. You can enable consistent hashing by setting MEMCACHED_DISTRIBUTION_CONSISTENT.  Consistent hashing delivers better distribution and allows servers to be added to the cluster with minimal cache losses. Currently MEMCACHED_DISTRIBUTION_CONSISTENT is an alias for the value MEMCACHED_DISTRIBUTION_CONSISTENT_KETAMA.  You can enable jump consistent hashing by setting MEMCACHED_DISTRIBUTION_JCH; to be of any benefit this should also probably be combined with MEMCACHED_BEHAVIOR_SORT_HOSTS (and sequentially-named hosts), and be used in an environment where the joining/leaving host is always the highest-numbered host.
+
 
 .. c:type:: MEMCACHED_BEHAVIOR_CACHE_LOOKUPS
 .. deprecated:: 0.46(?)
@@ -161,7 +162,7 @@ Enabling this will cause :manpage:`libmemcached(3)` to test all keys to verify t
 
 .. c:type:: MEMCACHED_BEHAVIOR_SORT_HOSTS
 
-Enabling this will cause hosts that are added to be placed in the host list in sorted order. This will defeat consisten hashing.
+Enabling this will cause hosts that are added to be placed in the host list in sorted order. This will defeat consistent hashing (unless using jump consistent hashing with sequentially-named hosts).
 
 
 .. c:type:: MEMCACHED_BEHAVIOR_CONNECT_TIMEOUT

@@ -86,6 +86,11 @@ uint32_t libhashkit_jenkins(const char *key, size_t key_length)
   return hashkit_jenkins(key, key_length, NULL);
 }
 
+uint32_t libhashkit_asis(const char *key, size_t key_length)
+{
+  return hashkit_asis(key, key_length, NULL);
+}
+
 uint32_t libhashkit_md5(const char *key, size_t key_length)
 {
   return hashkit_md5(key, key_length, NULL);

@@ -182,6 +182,7 @@ FALSE           { return yyextra->previous_token= CSL_FALSE; }
 
 CONSISTENT      { return CONSISTENT; }
 MODULA          { return MODULA; }
+JCH             { return JCH; }
 RANDOM          { return RANDOM; }
 
 MD5			{ return MD5; }
@@ -193,6 +194,7 @@ FNV1A_32			{ return FNV1A_32; }
 HSIEH			{ return HSIEH; }
 MURMUR			{ return MURMUR; }
 JENKINS			{ return JENKINS; }
+ASIS			{ return ASIS; }
 
 (([[:digit:]]{1,3}"."){3}([[:digit:]]{1,3})) {
       yyextra->hostname(yytext, yyleng, yylval->server);

@@ -50,6 +50,7 @@ bool memcached_is_consistent_distribution(const Memcached* memc)
   case MEMCACHED_DISTRIBUTION_CONSISTENT_KETAMA:
   case MEMCACHED_DISTRIBUTION_CONSISTENT_KETAMA_SPY:
   case MEMCACHED_DISTRIBUTION_CONSISTENT_WEIGHTED:
+  case MEMCACHED_DISTRIBUTION_JCH:
     return true;
 
   case MEMCACHED_DISTRIBUTION_MODULA:
@@ -545,6 +546,9 @@ memcached_return_t memcached_behavior_set_distribution(memcached_st *shell, memc
     case MEMCACHED_DISTRIBUTION_VIRTUAL_BUCKET:
       break;
 
+    case MEMCACHED_DISTRIBUTION_JCH:
+      break;
+
     default:
     case MEMCACHED_DISTRIBUTION_CONSISTENT_MAX:
       return memcached_set_error(*ptr, MEMCACHED_INVALID_ARGUMENTS, MEMCACHED_AT,
@@ -684,6 +688,7 @@ const char *libmemcached_string_distribution(const memcached_server_distribution
   case MEMCACHED_DISTRIBUTION_CONSISTENT_KETAMA_SPY: return "MEMCACHED_DISTRIBUTION_CONSISTENT_KETAMA_SPY";
   case MEMCACHED_DISTRIBUTION_CONSISTENT_WEIGHTED: return "MEMCACHED_DISTRIBUTION_CONSISTENT_WEIGHTED";
   case MEMCACHED_DISTRIBUTION_VIRTUAL_BUCKET: return "MEMCACHED_DISTRIBUTION_VIRTUAL_BUCKET";
+  case MEMCACHED_DISTRIBUTION_JCH: return "MEMCACHED_DISTRIBUTION_JCH";
   default:
   case MEMCACHED_DISTRIBUTION_CONSISTENT_MAX: return "INVALID memcached_server_distribution_t";
   }
